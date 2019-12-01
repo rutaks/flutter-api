@@ -12,9 +12,14 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
-  var _isLoading = false;
+  var _isLoading = true;
   var videos;
-  final String url = "API ROUTE";
+  final String url = "YOUR_API_ROUTE";
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _fetchData());
+  }
 
   _fetchData() async {
     final res = await http.get(url);
@@ -33,8 +38,10 @@ class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: new Scaffold(
         appBar: new AppBar(
+          backgroundColor: Colors.black,
           title: new Text("API APP"),
           actions: <Widget>[
             new IconButton(
