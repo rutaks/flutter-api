@@ -6,7 +6,8 @@ class ItemCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    var channel = item["channel"];
+
     return Column(
       children: <Widget>[
         Container(
@@ -20,10 +21,37 @@ class ItemCell extends StatelessWidget {
                 item["name"],
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              Container(height: 2.0),
-              Text(
-                "${item['numberOfViews']} Views",
-                style: TextStyle(color: Color.fromRGBO(12, 12, 12, 0.5)),
+              Container(height: 12.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 20.0,
+                              backgroundImage:
+                                  NetworkImage(channel["profileImageUrl"]),
+                              backgroundColor: Colors.transparent,
+                            ),
+                            Text(
+                              "  ${channel["name"]}",
+                              style: TextStyle(
+                                  color: Color.fromRGBO(12, 12, 12, 0.5)),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    Text(
+                      "${item['numberOfViews']} Views",
+                      style: TextStyle(color: Color.fromRGBO(12, 12, 12, 0.5)),
+                    ),
+                  ],
+                ),
               ),
               Divider(),
             ],
